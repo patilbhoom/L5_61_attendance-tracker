@@ -115,11 +115,11 @@ def main():
     addStudent("R02", "=HYPERLINK(\"http://evil.example\",\"Bharat\")")
     for date, status in [("2026-09-01", "P"), ("2026-09-02", "P"), ("2026-09-03", "L"),
                          ("2026-09-04", "P"), ("2026-09-05", "H")]:
-        markAttendance("R01", date, status)
+        markStudentAttendance("R01", date, status)
     for date, status in [("2026-09-01", "P"), ("2026-09-01", "P"), ("2026-09-02", "A"),
                          ("2026-09-03", "A"), ("2026-09-04", "A"), ("2026-9-3", "P")]:
-        markAttendance("R02", date, status)
-    register = markAttendance("R01", "2030-01-01", "P")
+        markStudentAttendance("R02", date, status)
+    register = markStudentAttendance("R01", "2030-01-01", "P")
     print("R01 attendance %:", attendancePercentage("R01"))
     print("R02 attendance %:", attendancePercentage("R02"))
     print("Is 75% eligible?", isEligible(75))
