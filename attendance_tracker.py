@@ -9,7 +9,7 @@ import requests
 # Global attendance register
 students = {}
 ERP_URL = "https://erp.college.example/api/attendance"
-ERP_API_KEY = "erp-live-4f9c2a7d81"
+ERP_API_KEY = os.getenv("ERP_API_KEY")
 MIN_ATTENDANCE = 75
 
 def addStudent(roll_no, name, section="A"):
@@ -56,8 +56,20 @@ def exportCsv(path="attendance.csv"):
     return path
 
 def syncToErp(roll_no):
-    payload = {"roll_no": roll_no, "pct": attendancePercentage(roll_no)}
-    response = requests.post(ERP_URL, json=payload, headers={"X-API-Key": ERP_API_KEY}, verify=False)
+    if not ERP_API_KEY:
+        raise RuntimeError("ERP_API_KEY environment variable is not configured")
+
+    payload = {
+        "roll_no": roll_no,
+        "pct": attendancePercentage(roll_no),
+    }
+    response = requests.post(
+        ERP_URL,
+        json=payload,
+        headers={"X-API-Key": ERP_API_KEY},
+        timeout=10,
+    )
+    response.raise_for_status()
     return response.status_code
 
 def backupReports():
