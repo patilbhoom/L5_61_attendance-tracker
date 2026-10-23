@@ -1,0 +1,25 @@
+attendance_tracker.py:1:1: F401 'os' imported but unused
+attendance_tracker.py:4:1: F401 'json' imported but unused
+attendance_tracker.py:6:1: F401 'datetime.datetime' imported but unused
+attendance_tracker.py:15:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:18:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:23:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:29:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:32:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:35:54: E712 comparison to False should be 'if cond is False:' or 'if not cond:'
+attendance_tracker.py:41:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:43:80: E501 line too long (84 > 79 characters)
+attendance_tracker.py:45:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:49:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:54:80: E501 line too long (92 > 79 characters)
+attendance_tracker.py:58:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:60:80: E501 line too long (101 > 79 characters)
+attendance_tracker.py:63:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:66:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:69:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:72:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:75:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:78:80: E501 line too long (87 > 79 characters)
+attendance_tracker.py:81:80: E501 line too long (87 > 79 characters)
+attendance_tracker.py:82:80: E501 line too long (86 > 79 characters)
+attendance_tracker.py:96:1: E305 expected 2 blank lines after class or function definition, found 1

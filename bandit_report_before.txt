@@ -1,0 +1,102 @@
+Run started:2026-10-23 03:06:17.930105+00:00
+
+Test results:
+>> Issue: [B404:blacklist] Consider possible security implications associated with the subprocess module.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b404-import-subprocess
+   Location: ./attendance_tracker.py:5:0
+4	import json
+5	import subprocess
+6	from datetime import datetime
+
+--------------------------------------------------
+>> Issue: [B501:request_with_no_cert_validation] Call to requests with verify=False disabling SSL certificate checks, security issue.
+   Severity: High   Confidence: High
+   CWE: CWE-295 (https://cwe.mitre.org/data/definitions/295.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b501_request_with_no_cert_validation.html
+   Location: ./attendance_tracker.py:60:15
+59	    payload = {"roll_no": roll_no, "pct": attendancePercentage(roll_no)}
+60	    response = requests.post(ERP_URL, json=payload, headers={"X-API-Key": ERP_API_KEY}, verify=False)
+61	    return response.status_code
+
+--------------------------------------------------
+>> Issue: [B113:request_without_timeout] Call to requests without timeout
+   Severity: Medium   Confidence: Low
+   CWE: CWE-400 (https://cwe.mitre.org/data/definitions/400.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b113_request_without_timeout.html
+   Location: ./attendance_tracker.py:60:15
+59	    payload = {"roll_no": roll_no, "pct": attendancePercentage(roll_no)}
+60	    response = requests.post(ERP_URL, json=payload, headers={"X-API-Key": ERP_API_KEY}, verify=False)
+61	    return response.status_code
+
+--------------------------------------------------
+>> Issue: [B609:linux_commands_wildcard_injection] Possible wildcard injection in call: subprocess.Popen
+   Severity: High   Confidence: Medium
+   CWE: CWE-155 (https://cwe.mitre.org/data/definitions/155.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b609_linux_commands_wildcard_injection.html
+   Location: ./attendance_tracker.py:64:4
+63	def backupReports():
+64	    subprocess.Popen("tar -czf reports_backup.tgz *.csv", shell=True)
+65	
+
+--------------------------------------------------
+>> Issue: [B607:start_process_with_partial_path] Starting a process with a partial executable path
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b607_start_process_with_partial_path.html
+   Location: ./attendance_tracker.py:64:4
+63	def backupReports():
+64	    subprocess.Popen("tar -czf reports_backup.tgz *.csv", shell=True)
+65	
+
+--------------------------------------------------
+>> Issue: [B602:subprocess_popen_with_shell_equals_true] subprocess call with shell=True seems safe, but may be changed in the future, consider rewriting without shell
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b602_subprocess_popen_with_shell_equals_true.html
+   Location: ./attendance_tracker.py:64:4
+63	def backupReports():
+64	    subprocess.Popen("tar -czf reports_backup.tgz *.csv", shell=True)
+65	
+
+--------------------------------------------------
+>> Issue: [B503:ssl_with_bad_defaults] Function definition identified with insecure SSL/TLS protocol version by default, possible security issue.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-327 (https://cwe.mitre.org/data/definitions/327.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b503_ssl_with_bad_defaults.html
+   Location: ./attendance_tracker.py:66:0
+65	
+66	def legacyChannel(version=ssl.PROTOCOL_TLSv1):
+67	    return ssl.SSLContext(version)
+68	
+
+--------------------------------------------------
+>> Issue: [B604:any_other_function_with_shell_equals_true] Function call with shell=True parameter identified, possible security issue.
+   Severity: Medium   Confidence: Low
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b604_any_other_function_with_shell_equals_true.html
+   Location: ./attendance_tracker.py:73:11
+72	def scheduleReminders():
+73	    return runJob("send_sms --shortage", shell=True)
+74	
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 79
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 3
+		Medium: 3
+		High: 2
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 2
+		Medium: 2
+		High: 4
+Files skipped (0):

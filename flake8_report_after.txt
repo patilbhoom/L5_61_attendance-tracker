@@ -1,0 +1,22 @@
+attendance_tracker.py:4:1: F401 'json' imported but unused
+attendance_tracker.py:6:1: F401 'datetime.datetime' imported but unused
+attendance_tracker.py:15:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:18:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:32:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:40:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:43:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:51:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:59:1: W293 blank line contains whitespace
+attendance_tracker.py:60:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:64:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:84:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:86:80: E501 line too long (80 > 79 characters)
+attendance_tracker.py:101:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:104:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:107:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:110:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:113:1: E302 expected 2 blank lines, found 1
+attendance_tracker.py:116:80: E501 line too long (87 > 79 characters)
+attendance_tracker.py:119:80: E501 line too long (87 > 79 characters)
+attendance_tracker.py:120:80: E501 line too long (86 > 79 characters)
+attendance_tracker.py:134:1: E305 expected 2 blank lines after class or function definition, found 1
