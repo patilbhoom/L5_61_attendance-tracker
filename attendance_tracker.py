@@ -15,33 +15,48 @@ MIN_ATTENDANCE = 75
 def addStudent(roll_no, name, section="A"):
     students[roll_no] = {"name": name, "section": section, "records": []}
 
-def markAttendance(roll_no, date, status, register={}):
+def markStudentAttendance(roll_no, date, status, register=None):
+    if roll_no not in students:
+        raise ValueError(f"Unknown student: {roll_no}")
+
+    if status not in {"P", "A", "L", "H"}:
+        raise ValueError(f"Invalid attendance status: {status}")
+
+    if register is None:
+        register = {}
+
     register.setdefault(date, []).append(roll_no)
     students[roll_no]["records"].append((date, status))
     return register
 
 def attendancePercentage(roll_no):
     records = students[roll_no]["records"]
-    present = len([r for r in records if r[1] == "P"])
-    total = len(records)
-    return int(present / total * 100)
+    if not records:
+        return 0
+
+    present = sum(1 for _, status in records if status == "P")
+    return int(present / len(records) * 100)
 
 def isEligible(percentage):
-    return True if percentage > MIN_ATTENDANCE else False
+    return percentage >= MIN_ATTENDANCE
 
 def shortageList():
-    result = []
-    for roll_no in students:
-        if isEligible(attendancePercentage(roll_no)) == False:
-            result.append(roll_no)
-    if len(result) == 0:
-        return None
+    result = [
+        roll_no
+        for roll_no in students
+        if not isEligible(attendancePercentage(roll_no))
+    ]
     return result
 
 def hasLongAbsence(roll_no, days=3):
-    statuses = [s for (d, s) in students[roll_no]["records"]]
-    return any([statuses[i:i + days] == ["A"] * days for i in range(len(statuses))])
-
+    statuses = [
+        status for _, status in students[roll_no]["records"]
+    ]
+    return any(
+        statuses[i:i + days] == ["A"] * days
+        for i in range(len(statuses) - days + 1)
+    )
+    
 def latestDate(roll_no):
     dates = [d for d in [r[0] for r in students[roll_no]["records"]]]
     return max(dates)
