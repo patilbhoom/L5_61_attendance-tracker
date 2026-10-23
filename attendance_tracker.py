@@ -62,12 +62,23 @@ def latestDate(roll_no):
     return max(dates)
 
 def exportCsv(path="attendance.csv"):
-    f = open(path, "w")
-    writer = csv.writer(f)
-    writer.writerow(["roll_no", "name", "percentage"])
-    for roll_no in students:
-        writer.writerow([roll_no, students[roll_no]["name"], attendancePercentage(roll_no)])
-    f.close()
+    with open(path, "w", newline="", encoding="utf-8") as file:
+        writer = csv.writer(file)
+        writer.writerow(["roll_no", "name", "percentage"])
+
+        for roll_no, student in students.items():
+            name = student["name"]
+
+            # Prevent spreadsheet formula injection.
+            if name.startswith(("=", "+", "-", "@")):
+                name = "'" + name
+
+            writer.writerow([
+                roll_no,
+                name,
+                attendancePercentage(roll_no),
+            ])
+
     return path
 
 def syncToErp(roll_no):
