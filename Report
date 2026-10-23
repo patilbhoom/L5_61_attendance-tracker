@@ -1,0 +1,107 @@
+# STATIC CODE ANALYSIS OF ATTENDANCE TRACKER
+
+## 1. Introduction
+
+Static code analysis is the process of examining source code without executing the program to identify potential errors, security vulnerabilities, coding-standard violations, and maintainability issues.
+
+This lab applies static code analysis to a Python-based Attendance Tracker application using three tools: **Pylint, Bandit, and Flake8**. The original code was analyzed, improvements were made, and the analysis was repeated to compare the results before and after modifications.
+
+## 2. Objectives
+
+- Identify coding errors and potential security vulnerabilities.
+- Evaluate Python code quality and adherence to coding standards.
+- Improve code readability, maintainability, and reliability.
+- Compare static analysis results before and after modifications.
+- Automate code quality checks using GitHub Actions.
+
+## 3. Tools and Technologies Used
+
+**Pylint:** Analyzes Python code for programming errors, naming conventions, coding standards, and maintainability. It provides a code quality score out of 10.
+
+**Bandit:** Examines Python source code for common security issues, including unsafe subprocess usage and insecure configurations.
+
+**Flake8:** Checks Python code for style violations, formatting problems, and certain programming errors.
+
+**GitHub Actions:** Automates the execution of static analysis tools whenever configured workflow triggers occur.
+
+**Python:** The programming language used to implement the Attendance Tracker.
+
+## 4. Project Description
+
+The Attendance Tracker is a Python application that maintains student attendance records and calculates attendance percentages. It includes functions for adding students, recording attendance, identifying students with attendance shortages, detecting consecutive absences, finding the latest attendance date, exporting attendance data to CSV, and preparing data for ERP synchronization.
+
+The original implementation contained several potential problems, including hardcoded API credentials, disabled SSL certificate verification, mutable default arguments, missing handling of empty attendance records, and unsafe subprocess usage.
+
+## 5. Methodology
+
+The following steps were performed:
+
+1. The original Python source code was added to a GitHub repository.
+2. A GitHub Actions workflow was configured to execute Pylint, Bandit, and Flake8.
+3. The original code was analyzed, and the generated reports were saved as the baseline.
+4. Code modifications were made to address security, attendance validation, and CSV export concerns.
+5. The workflow was executed again to generate updated reports.
+6. The original and updated reports were compared to evaluate changes in code quality and security findings.
+
+## 6. Code Improvements
+
+### 6.1 Security Improvements
+
+The API key handling was changed to use an environment variable instead of embedding the credential directly in the source code. The ERP request was updated to include a timeout, and disabled SSL certificate verification was removed.
+
+These changes reduce the risk of exposing credentials and improve the security of HTTP requests.
+
+### 6.2 Attendance Validation
+
+The attendance-related code was reviewed to address issues involving mutable default arguments and attendance calculation edge cases. The eligibility logic and handling of student records were also reviewed.
+
+### 6.3 CSV Export
+
+The CSV export functionality was reviewed to improve file handling and reduce the risk of spreadsheet formula injection from untrusted student names. The use of context-managed file operations and explicit encoding improves reliability.
+
+### 6.4 Code Quality
+
+The code was reviewed for naming consistency, unused imports, formatting, and maintainability. The updated reports were used to identify issues that remained after the modifications.
+
+## 7. Results and Analysis
+
+The following table summarizes the original baseline and the updated reports available during analysis.
+
+| Tool | Before | After | Observation |
+|---|---:|---:|---|
+| Bandit | 8 findings | 6 findings | Security findings decreased. |
+| Flake8 | 25 reported issues | 25 reported issues | The total count remained unchanged. |
+| Pylint | 4.55/10 | 6.07/10 | The code quality score improved. |
+
+### 7.1 Bandit Analysis
+
+Bandit findings decreased from 8 to 6. Changes to HTTP request handling addressed findings associated with disabled SSL verification and missing request timeouts. However, some security concerns, including subprocess usage and legacy TLS configuration, remained and require further review.
+
+### 7.2 Flake8 Analysis
+
+The number of reported issues remained at 25 in the compared reports. Although some findings changed after code modifications, the report indicates that further work is required to eliminate all style and programming errors.
+
+### 7.3 Pylint Analysis
+
+The Pylint score increased from 4.55/10 to 6.07/10. This indicates improvement in the checks evaluated by Pylint. However, the score remained below the target of 9.5–10 stated in the project README. Additional improvements to documentation, naming conventions, unused imports, and other code-quality issues would be required to reach that target.
+
+### 7.4 GitHub Actions
+
+GitHub Actions was used to automate static analysis. Successful workflow runs confirmed that the configured analysis steps executed. The generated reports were made available as workflow artifacts for review and comparison.
+
+A successful workflow run does not necessarily mean that every static analysis warning or security finding has been eliminated.
+
+## 8. Conclusion
+
+This lab demonstrated how Pylint, Bandit, and Flake8 can be used to assess Python code quality and identify potential security issues. The Attendance Tracker was reviewed and modified to improve API credential handling, HTTP request security, attendance validation, and CSV export.
+
+The comparison showed that Bandit findings decreased from 8 to 6 and the Pylint score increased from 4.55/10 to 6.07/10. Flake8's total reported issue count remained unchanged, demonstrating that some code-quality concerns still require attention.
+
+Overall, the lab provided practical experience with static code analysis, security review, code-quality improvement, report comparison, and automated checking through GitHub Actions.
+
+## 9. References
+
+1. Pylint documentation: https://pylint.readthedocs.io/
+2. Bandit documentation: https://bandit.readthedocs.io/
+3. Flake8 documentation: https://flake8.pycqa.org/
+4. GitHub Actions documentation: https://docs.github.com/actions
